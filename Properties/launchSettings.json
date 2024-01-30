@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "NCAD": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Nanosoft\\nanoCAD x64 24.0\\nCad.exe",
+      "commandLineArgs": "-g \"D:\\code\\.net\\AttSyncNet\\bin\\x64\\Debug\\net6.0\\AttSyncNet.dll\"",
+      "workingDirectory": "C:\\Program Files\\Nanosoft\\nanoCAD x64 24.0\\"
+    }
+  }
+}

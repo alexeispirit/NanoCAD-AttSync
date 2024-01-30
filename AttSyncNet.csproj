@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="hostdbmgd">
+      <HintPath>..\..\..\src\NCAD_SDK\24\include-x64\hostdbmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="hostmgd">
+      <HintPath>..\..\..\src\NCAD_SDK\24\include-x64\hostmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
