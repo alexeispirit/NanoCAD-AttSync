@@ -11,6 +11,7 @@ public class AttSync
     [LispFunction("att-sync")]
     public void AttSyncFuncBlockRef(ResultBuffer rbArgs)
     {
+        // rbArgs - ObjectId of BlockReference (car (entget))
         Document doc = Application.DocumentManager.MdiActiveDocument;
         Database db = doc.Database;
         Editor ed = doc.Editor;
@@ -57,6 +58,7 @@ public class AttSync
     [LispFunction("att-sync-all")]
     public void AttSyncFuncBlockDef(ResultBuffer rbArgs)
     {
+        // rbArgs - ObjectId of BlockDefinition (vlax-vla-object (vla-item (vla-get-blocks (vla-get-activedocument (vlax-get-acad-object))) "BLOCKNAME"))
         Document doc = Application.DocumentManager.MdiActiveDocument;
         Database db = doc.Database;
         Editor ed = doc.Editor;
