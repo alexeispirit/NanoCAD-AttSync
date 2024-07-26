@@ -102,7 +102,7 @@ public class AttSync
     }
 
     [LispFunction("att-sync-all")]
-    public void AttSyncAll()
+    public void AttSyncAll(ResultBuffer rbArgs)
     {
         Document doc = Application.DocumentManager.MdiActiveDocument;
         Database db = doc.Database;
