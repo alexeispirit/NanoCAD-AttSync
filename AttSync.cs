@@ -55,7 +55,7 @@ public class AttSync
         }
     }
 
-    [LispFunction("att-sync-all")]
+    [LispFunction("att-sync-block")]
     public void AttSyncFuncBlockDef(ResultBuffer rbArgs)
     {
         // rbArgs - ObjectId of BlockDefinition (vlax-vla-object (vla-item (vla-get-blocks (vla-get-activedocument (vlax-get-acad-object))) "BLOCKNAME"))
@@ -97,6 +97,42 @@ public class AttSync
             {
                 ed.WriteMessage(ex.Message);
                 tr.Abort();
+            }
+        }
+    }
+
+    [LispFunction("att-sync-all")]
+    public void AttSyncAll()
+    {
+        Document doc = Application.DocumentManager.MdiActiveDocument;
+        Database db = doc.Database;
+        Editor ed = doc.Editor;
+
+        using (Transaction tr = db.TransactionManager.StartTransaction())
+        {
+            try
+            {
+                BlockTable bt = (BlockTable)tr.GetObject(db.BlockTableId, OpenMode.ForWrite);
+                foreach (ObjectId id in bt)
+                {
+                    BlockTableRecord btr = (BlockTableRecord)tr.GetObject(id, OpenMode.ForRead);
+                    if (btr.IsLayout)
+                    {
+                        continue;
+                    }
+
+                    ObjectIdCollection blockRefIds = btr.GetBlockReferenceIds(false, false);
+                    foreach (ObjectId blockRefId in blockRefIds)
+                    {
+                        BlockReference br = (BlockReference)tr.GetObject(blockRefId, OpenMode.ForRead);
+                        SynchronizeAttributes(br, tr);
+                    }
+                }
+                tr.Commit();
+            }
+            catch (Teigha.Runtime.Exception ex)
+            {
+                ed.WriteMessage(ex.ToString());
             }
         }
     }
